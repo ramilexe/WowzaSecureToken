@@ -1,4 +1,4 @@
 WowzaSecureToken
 ================
 
-PHP implementation for Wowza SecureToken
+PHP library for Wowza SecureToken
