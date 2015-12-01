@@ -1,5 +1,5 @@
 {
-    "name": "ramilexe/wowza-secure-token ",
+    "name": "ramilexe/wowza-secure-token",
     "description": "PHP library for Wowza SecureToken module",
     "license": "MIT",
     "authors": [
