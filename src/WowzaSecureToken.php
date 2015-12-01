@@ -32,7 +32,7 @@ class WowzaSecureToken
     /**
      * @var string|null client IP for validation in Wowza
      */
-    protected $clientIP = null;
+    protected $clientIp = null;
 
     /**
      * @var string prefix for all query parameters
@@ -55,21 +55,21 @@ class WowzaSecureToken
      * @param string $ip
      * @throws WowzaException
      */
-    public function setClientIP($ip)
+    public function setClientIp($ip)
     {
         if (!filter_var($ip, FILTER_VALIDATE_IP)) {
             throw new WowzaException("User IP (" . $ip . ") is invalid");
         }
 
-        $this->clientIP = $ip;
+        $this->clientIp = $ip;
     }
 
     /**
      * @return null|string
      */
-    public function getClientIP()
+    public function getClientIp()
     {
-        return $this->clientIP;
+        return $this->clientIp;
     }
 
     /**
@@ -135,8 +135,8 @@ class WowzaSecureToken
         }
 
         //add client ip
-        if ($this->clientIP) {
-            $params[$this->clientIP] = "";
+        if ($this->clientIp) {
+            $params[$this->clientIp] = "";
         }
 
         //add secret key
