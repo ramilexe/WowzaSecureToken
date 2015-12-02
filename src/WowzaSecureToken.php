@@ -44,9 +44,22 @@ class WowzaSecureToken
      */
     protected $sharedSecret;
 
-    public function __construct()
-    {
+    /**
+     * The time (in UTC seconds) when SecureToken playback security stops.
+     * Player connections that occur after the end time will be rejected.
+     *
+     * @var int end time
+     */
+    protected $endTime;
 
+    /**
+     * Set end time
+     *
+     * @param int $second
+     */
+    public function setEndTime($second)
+    {
+        $this->endTime = $second;
     }
 
     /**
@@ -139,6 +152,11 @@ class WowzaSecureToken
             $params[$this->clientIp] = "";
         }
 
+        //add end time
+        if ($this->endTime) {
+            $params[$this->prefix . 'endtime'] = $this->endTime;
+        }
+
         //add secret key
         $params[$this->sharedSecret] = "";
 
@@ -161,7 +179,7 @@ class WowzaSecureToken
         $query = $pathItems[0] . "/" . $pathItems[1] . "?" . $query;
 
         $hash = hash($this->algorithms[$hashMethod], $query, true);
-        $hash = base64_encode($hash);
+        $hash = strtr(base64_encode($hash), '+/', '-_');
 
         return $hash;
     }
