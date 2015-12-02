@@ -163,7 +163,17 @@ class WowzaSecureToken
         //sort array
         ksort($params);
 
-        $query = http_build_query($params);
+        $query = '';
+        foreach ($params as $key => $value) {
+            if (empty($value)) {
+                $query .= $key;
+            }
+            else {
+                $query .= $key.'='.$value;
+            }
+            $query .= '&';
+        }
+        $query = substr($query, 0, -1);
 
         $urlInfo = parse_url($contentUrl);
         if (!isset($urlInfo['path'])) {
